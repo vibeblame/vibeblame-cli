@@ -1,5 +1,5 @@
 {
-  "name": "vibeblame-cli",
+  "name": "@vibeblame/cli",
   "version": "0.1.0",
   "description": "Standalone security scanner for web applications",
   "type": "module",
@@ -10,6 +10,9 @@
     "build": "tsc -p tsconfig.json",
     "test": "tsc -p tsconfig.test.json && node --test dist/tests/scoring.test.js dist/tests/output.test.js dist/tests/scanners/headers.test.js dist/tests/scanners/secrets.test.js dist/tests/scanners/seo.test.js dist/tests/scanners/tls.test.js"
   },
+  "files": [
+    "dist/src"
+  ],
   "keywords": [
     "security",
     "scanner",

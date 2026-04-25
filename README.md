@@ -4,15 +4,15 @@ Security & SEO scanner built for vibe coders. No backend required.
 
 > Part of **[vibeblame.com](https://vibeblame.com)** — the full web app audit platform.
 
-[![npm version](https://img.shields.io/npm/v/vibeblame-cli)](https://www.npmjs.com/package/vibeblame-cli)
-[![npm downloads](https://img.shields.io/npm/dm/vibeblame-cli)](https://www.npmjs.com/package/vibeblame-cli)
+[![npm version](https://img.shields.io/npm/v/@vibeblame/cli)](https://www.npmjs.com/package/@vibeblame/cli)
+[![npm downloads](https://img.shields.io/npm/dm/@vibeblame/cli)](https://www.npmjs.com/package/@vibeblame/cli)
 [![License](https://img.shields.io/badge/license-MIT-green)](#)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D18-brightgreen)](#)
 [![CI](https://github.com/vibeblame/vibeblame-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/vibeblame/vibeblame-cli/actions)
 [![Docs](https://img.shields.io/badge/docs-vibeblame.github.io-blue)](https://vibeblame.github.io/vibeblame-cli/)
 
 ```
-$ npx vibeblame https://my-app.vercel.app
+$ npx @vibeblame/cli https://my-app.vercel.app
 
 Scanning... ████████████████████ 4/4
 
@@ -35,10 +35,10 @@ Scanned in 4.2s · vibeblame.com
 
 ```bash
 # One-off scan — no install needed
-npx vibeblame https://example.com
+npx @vibeblame/cli https://example.com
 
 # Global install
-npm install -g vibeblame-cli
+npm install -g @vibeblame/cli
 vibeblame https://example.com
 ```
 
@@ -57,16 +57,16 @@ Options:
 
 ```bash
 # Pretty terminal output (default)
-npx vibeblame https://example.com
+npx @vibeblame/cli https://example.com
 
 # JSON output for CI / scripting
-npx vibeblame https://example.com --json | jq '.score'
+npx @vibeblame/cli https://example.com --json | jq '.score'
 
 # Run only specific scanners
-npx vibeblame https://example.com --only headers,seo
+npx @vibeblame/cli https://example.com --only headers,seo
 
 # TLS check only
-npx vibeblame https://example.com --only tls
+npx @vibeblame/cli https://example.com --only tls
 ```
 
 ## What it checks
