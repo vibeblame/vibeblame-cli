@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.claude/
+
+# Ignore all .md files except README.md
+*.md
+!README.md

@@ -1,0 +1,34 @@
+{
+  "name": "vibeblame-cli",
+  "version": "0.1.0",
+  "description": "Standalone security scanner for web applications",
+  "type": "module",
+  "bin": {
+    "vibeblame": "./dist/src/index.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "tsc -p tsconfig.test.json && node --test dist/tests/scoring.test.js dist/tests/output.test.js dist/tests/scanners/headers.test.js dist/tests/scanners/secrets.test.js dist/tests/scanners/seo.test.js dist/tests/scanners/tls.test.js"
+  },
+  "keywords": [
+    "security",
+    "scanner",
+    "cli",
+    "tls",
+    "headers",
+    "seo"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "kleur": "^4.1.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.4.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
