@@ -2,11 +2,14 @@
 
 Security & SEO scanner built for vibe coders. No backend required.
 
+> Part of **[vibeblame.com](https://vibeblame.com)** — the full web app audit platform.
+
 [![npm version](https://img.shields.io/npm/v/vibeblame-cli)](https://www.npmjs.com/package/vibeblame-cli)
 [![npm downloads](https://img.shields.io/npm/dm/vibeblame-cli)](https://www.npmjs.com/package/vibeblame-cli)
 [![License](https://img.shields.io/badge/license-MIT-green)](#)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D18-brightgreen)](#)
-[![CI](https://github.com/USERNAME/vibeblame-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/USERNAME/vibeblame-cli/actions)
+[![CI](https://github.com/vibeblame/vibeblame-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/vibeblame/vibeblame-cli/actions)
+[![Docs](https://img.shields.io/badge/docs-vibeblame.github.io-blue)](https://vibeblame.github.io/vibeblame-cli/)
 
 ```
 $ npx vibeblame https://my-app.vercel.app
@@ -68,12 +71,12 @@ npx vibeblame https://example.com --only tls
 
 ## What it checks
 
-| Scanner | Checks | Max score |
-|---|---|---|
-| 🔒 TLS/SSL | Protocol version (TLS 1.0/1.1 flagged), cert expiry, self-signed, domain mismatch | 20 |
-| 🛡 Headers | CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy | 25 |
-| 🔍 Secrets & Source Maps | Stripe/GitHub/Google/Slack keys in JS bundles, exposed `.map` files, `NEXT_PUBLIC_*` vars | 30 |
-| 📄 SEO | `<title>`, meta description, `<h1>`, Open Graph tags, canonical URL, `robots.txt`, `llms.txt` | 15 |
+| Scanner                  | Checks                                                                                        | Max score |
+| ------------------------ | --------------------------------------------------------------------------------------------- | --------- |
+| 🔒 TLS/SSL               | Protocol version (TLS 1.0/1.1 flagged), cert expiry, self-signed, domain mismatch             | 20        |
+| 🛡 Headers               | CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy       | 25        |
+| 🔍 Secrets & Source Maps | Stripe/GitHub/Google/Slack keys in JS bundles, exposed `.map` files, `NEXT_PUBLIC_*` vars     | 30        |
+| 📄 SEO                   | `<title>`, meta description, `<h1>`, Open Graph tags, canonical URL, `robots.txt`, `llms.txt` | 15        |
 
 **Score verdicts:** 90–100 Excellent · 70–89 Needs work · 50–69 At risk · 0–49 Critical
 
@@ -124,8 +127,6 @@ cd vibeblame-cli
 npm install
 npm test          # build + run 61 tests via node:test
 ```
-
-PRs welcome. Please add or update tests for any changed scanner logic.
 
 ## License
 
