@@ -168,7 +168,9 @@ export async function scanSecrets(url: string): Promise<ScannerResult> {
     if (resolved) scriptSrcs.push(resolved);
   });
 
-  const seenMapIssue = new Set<string>();
+  // Counters for deduplication — report each issue type once with a count
+  let exposedMapCount = 0;
+  let commentMapCount = 0;
 
   await Promise.all(
     scriptSrcs.map(async (scriptUrl) => {
@@ -183,33 +185,15 @@ export async function scanSecrets(url: string): Promise<ScannerResult> {
           method: 'HEAD',
           signal: AbortSignal.timeout(5_000),
         });
-        if (mapRes.ok && !seenMapIssue.has(mapUrl)) {
-          seenMapIssue.add(mapUrl);
-          issues.push({
-            id: 'secrets.sourcemap.exposed',
-            severity: 'CRITICAL',
-            title: 'Source map file publicly accessible',
-            detail: `Source map exposed: ${filename}.map`,
-          });
-          score -= 10;
-        }
+        if (mapRes.ok) exposedMapCount++;
       } catch {
         // map fetch failed — not exposed
       }
 
       // Check SourceMappingURL comment inside JS
-      if (/\/\/# sourceMappingURL=/.test(js) && !seenMapIssue.has(scriptUrl + '#comment')) {
-        seenMapIssue.add(scriptUrl + '#comment');
-        issues.push({
-          id: 'secrets.sourcemap.comment',
-          severity: 'HIGH',
-          title: 'SourceMappingURL comment found in JS',
-          detail: `JS bundle references a source map: ${filename}`,
-        });
-        score -= 5;
-      }
+      if (/\/\/# sourceMappingURL=/.test(js)) commentMapCount++;
 
-      // Scan for secrets
+      // Scan for secrets (still reported per-file, different secret types)
       const secretIssues = scanJSContent(js, filename);
       for (const issue of secretIssues) {
         issues.push(issue);
@@ -217,6 +201,27 @@ export async function scanSecrets(url: string): Promise<ScannerResult> {
       }
     })
   );
+
+  // Report source map issues once, with a file count in the detail
+  if (exposedMapCount > 0) {
+    issues.unshift({
+      id: 'secrets.sourcemap.exposed',
+      severity: 'CRITICAL',
+      title: 'Source map files publicly accessible',
+      detail: `${exposedMapCount} source map file${exposedMapCount > 1 ? 's' : ''} exposed (.map)`,
+    });
+    score -= 10;
+  }
+
+  if (commentMapCount > 0) {
+    issues.unshift({
+      id: 'secrets.sourcemap.comment',
+      severity: 'HIGH',
+      title: 'SourceMappingURL comments found in JS',
+      detail: `${commentMapCount} JS bundle${commentMapCount > 1 ? 's' : ''} reference source maps`,
+    });
+    score -= 5;
+  }
 
   return {
     name: 'Secrets & Source Maps',

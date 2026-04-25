@@ -108,7 +108,7 @@ export function printPretty(result: ScanResult): void {
   if (hasActionable) {
     console.log('');
     console.log(kleur.dim('──────────────────────────────────────────'));
-    console.log(kleur.cyan('Fix it with AI → ') + kleur.bold('vibeblame --prompt | pbcopy'));
+    console.log(kleur.cyan('Fix it with AI → ') + kleur.bold(`npx @vibeblame/cli ${result.url} --prompt | pbcopy`));
     console.log(kleur.dim('──────────────────────────────────────────'));
   }
 }
