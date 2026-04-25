@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /**
  * CLI entrypoint — parses arguments, runs scan, outputs result.
  * Usage: npx vibeblame <url> [--json] [--prompt] [--only tls,headers,secrets,seo]
